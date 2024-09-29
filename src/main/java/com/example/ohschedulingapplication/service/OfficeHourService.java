@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SchedulingService {
+public class OfficeHourService {
     @Autowired
     private OfficeHourRepository officeHourRepository;
 
@@ -30,22 +30,5 @@ public class SchedulingService {
     // Delete an office hour by ID
     public void deleteOfficeHour(Long id) {
         officeHourRepository.deleteById(id);
-    }
-
-    // Add a student to an office hour, enforcing capacity limit
-    public OfficeHour addStudentToOfficeHour(Long officeHourId, Long studentId) {
-        OfficeHour officeHour = officeHourRepository.findById(officeHourId).orElseThrow();
-        if (officeHour.getStudentIds().size() >= officeHour.getCapacity()) {
-            throw new IllegalStateException("Office hour is full. Cannot add more students.");
-        }
-        officeHour.getStudentIds().add(studentId);
-        return officeHourRepository.save(officeHour);
-    }
-
-    // Remove a student from an office hour
-    public OfficeHour removeStudentFromOfficeHour(Long officeHourId, Long studentId) {
-        OfficeHour officeHour = officeHourRepository.findById(officeHourId).orElseThrow();
-        officeHour.getStudentIds().remove(studentId);
-        return officeHourRepository.save(officeHour);
     }
 }

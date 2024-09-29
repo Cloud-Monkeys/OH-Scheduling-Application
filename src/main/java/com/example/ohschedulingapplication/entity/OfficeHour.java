@@ -2,8 +2,6 @@ package com.example.ohschedulingapplication.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class OfficeHour {
@@ -11,13 +9,14 @@ public class OfficeHour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long professorId;
-    @ElementCollection
-    private List<Long> studentIds = new ArrayList<>();
-    private int capacity;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private int capacity;
 
-    // Constructor
+    // Constructors
+
+    public OfficeHour() {}
+
     public OfficeHour(Long professorId, LocalDateTime startTime, LocalDateTime endTime, int capacity) {
         this.professorId = professorId;
         this.startTime = startTime;
@@ -41,14 +40,6 @@ public class OfficeHour {
 
     public void setProfessorId(Long professorId) {
         this.professorId = professorId;
-    }
-
-    public List<Long> getStudentIds() {
-        return studentIds;
-    }
-
-    public void setStudentIds(List<Long> studentIds) {
-        this.studentIds = studentIds;
     }
 
     public int getCapacity() {
