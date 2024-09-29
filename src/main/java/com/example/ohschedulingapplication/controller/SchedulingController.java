@@ -16,30 +16,33 @@ public class SchedulingController {
     @Autowired
     private SchedulingService schedulingService;
 
-    // OfficeHour Endpoints
+    // Create a new office hour
     @PostMapping("/officehours")
     public ResponseEntity<OfficeHour> createOfficeHour(@RequestBody OfficeHour officeHour) {
         return new ResponseEntity<>(schedulingService.createOfficeHour(officeHour), HttpStatus.CREATED);
     }
 
+    // Get available office hours for a professor
     @GetMapping("/officehours/{professorId}/available")
     public ResponseEntity<List<OfficeHour>> getAvailableOfficeHours(@PathVariable Long professorId) {
         return new ResponseEntity<>(schedulingService.getAvailableOfficeHours(professorId), HttpStatus.OK);
     }
 
+    // Update an office hour
     @PutMapping("/officehours")
     public ResponseEntity<Void> updateOfficeHour(@RequestBody OfficeHour officeHour) {
         schedulingService.updateOfficeHour(officeHour);
         return ResponseEntity.ok().build();
     }
 
+    // Delete an office hour by ID
     @DeleteMapping("/officehours/{id}")
     public ResponseEntity<Void> deleteOfficeHour(@PathVariable Long id) {
         schedulingService.deleteOfficeHour(id);
         return ResponseEntity.ok().build();
     }
 
-    // Add a student to office hour
+    // Add a student to an office hour
     @PutMapping("/officehours/{officeHourId}/addStudent/{studentId}")
     public ResponseEntity<OfficeHour> addStudentToOfficeHour(@PathVariable Long officeHourId, @PathVariable Long studentId) {
         try {
@@ -49,7 +52,7 @@ public class SchedulingController {
         }
     }
 
-    // Remove a student from office hour
+    // Remove a student from an office hour
     @PutMapping("/officehours/{officeHourId}/removeStudent/{studentId}")
     public ResponseEntity<OfficeHour> removeStudentFromOfficeHour(@PathVariable Long officeHourId, @PathVariable Long studentId) {
         return new ResponseEntity<>(schedulingService.removeStudentFromOfficeHour(officeHourId, studentId), HttpStatus.OK);

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface OfficeHourRepository extends JpaRepository {
+public interface OfficeHourRepository extends JpaRepository<OfficeHour, Long> {
     List<OfficeHour> findByProfessorIdAndIsOpen(Long professorId);
 }

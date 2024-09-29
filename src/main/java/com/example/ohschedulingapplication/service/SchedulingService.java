@@ -12,18 +12,22 @@ public class SchedulingService {
     @Autowired
     private OfficeHourRepository officeHourRepository;
 
+    // Create a new office hour
     public OfficeHour createOfficeHour(OfficeHour officeHour) {
         return officeHourRepository.save(officeHour);
     }
 
+    // Get available office hours for a professor
     public List<OfficeHour> getAvailableOfficeHours(Long professorId) {
         return officeHourRepository.findByProfessorIdAndIsOpen(professorId);
     }
 
+    // Update an office hour
     public void updateOfficeHour(OfficeHour officeHour) {
         officeHourRepository.save(officeHour);
     }
 
+    // Delete an office hour by ID
     public void deleteOfficeHour(Long id) {
         officeHourRepository.deleteById(id);
     }
